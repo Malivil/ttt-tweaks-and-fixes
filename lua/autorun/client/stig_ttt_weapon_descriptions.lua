@@ -218,5 +218,15 @@ hook.Add("PreRegisterSWEP", "StigTTTWeaponDescriptions", function(SWEP, class)
             type = "item_weapon",
             desc = "Give someone a Present!\nYou have a 3 in 4 chance to heal 50HP\n...and a 1 in 4 chance to explode!\nThis can be used twice!"
         }
+    elseif class == "weapon_ttt_awp" then
+        SWEP.EquipMenuData = {
+            type = "item_weapon",
+            desc = "Silenced 1-shot-kill sniper rifle.\n\nOnly has 1 ammo."
+        }
+    elseif class == "weapon_ttt_rsb" then
+        SWEP.EquipMenuData = {
+            type = "item_weapon",
+            desc = "Remote Sticky Bomb.\n\nRight-click on someone in melee range,\nwhich plants a bomb on them.\n\nRight-click again to charge the bomb,\nleft-click once charged to detonate!"
+        }
     end
 end)
