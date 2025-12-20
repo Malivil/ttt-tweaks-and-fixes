@@ -70,6 +70,8 @@ ttt_tweaks_cr_m9k_dbarrel 0                         // Whether to force the M9K 
 
 ttt_tweaks_drone_controller_tool_gun_model 1        // Whether to change the model of the "Drone Controller" weapon to the tool gun model
 
+ttt_tweaks_jetpack_deployer_message 1               // Whether to display a message in chat when the jetpack deployer is used, explaining how to equip it
+
 ttt_tweaks_barnacles_ignore_jesters 1               // Whether to allow players on the jester team to be picked up by barnacles
 ```
 

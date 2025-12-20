@@ -779,6 +779,20 @@ hook.Add("PreRegisterSWEP", "StigSpecialWeaponTweaks", function(SWEP, class)
 
             return true
         end
+    elseif class == "weapon_ttt_jetpackspawner" then
+        -- Adding a chat message to tell the player what button to press to equip the jetpack deployer
+        local messageCvar = CreateConVar("ttt_tweaks_jetpack_deployer_message", 1, {FCVAR_ARCHIVE, FCVAR_REPLICATED}, "Whether to display a message in chat when the jetpack deployer is used, explaining how to equip it")
+
+        if not messageCvar:GetBool() then return end
+
+        function SWEP:Deploy()
+            if CLIENT then return end
+            local owner = self:GetOwner()
+            if not IsValid(owner) then return end
+            owner:ChatPrint("Left-click to place the jetpack, then press 'E' to equip it")
+
+            return true
+        end
     end
 end)
 
