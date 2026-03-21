@@ -749,6 +749,20 @@ hook.Add("PreRegisterSWEP", "StigTTTWeaponFixes", function(SWEP, class)
 
             return self:OldDrawKeyBindHints(...)
         end
+
+        SWEP.OldDrawHUDAmmo = SWEP.DrawHUDAmmo
+
+        function SWEP:DrawHUDAmmo(...)
+            if not IsValid(self:GetOwner()) then return end
+            self:OldDrawHUDAmmo(...)
+        end
+
+        SWEP.OldRecoil = SWEP.Recoil
+
+        function SWEP:Recoil(...)
+            if not IsValid(self:GetOwner()) then return end
+            self:OldRecoil(...)
+        end
     elseif class == "stungun" and CLIENT then
         -- Fix lua error when the weapon is stripped
         timer.Simple(0, function()
