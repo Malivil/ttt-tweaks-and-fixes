@@ -34,3 +34,18 @@ hook.Add("TTTPrepareRound", "StigTTTFixes", function()
         FixVisibleSpectators()
     end)
 end)
+
+-- Fixes an error with the prone mod, when using a playermodel without a head bone
+if CLIENT then
+    hook.Add("InitPostEntity", "StigTTTFixes", function()
+        local oldCalcView = hook.GetTable()["CalcView"]["prone.ViewTransitions"]
+
+        if oldCalcView then
+            hook.Add("CalcView", "prone.ViewTransitions", function(ply, ...)
+                if not ply:LookupBone("ValveBiped.Bip01_Head1") then return end
+
+                return oldCalcView(ply, ...)
+            end)
+        end
+    end)
+end

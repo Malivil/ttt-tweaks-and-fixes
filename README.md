@@ -259,6 +259,10 @@ Fixed the demonic possession error spamming if it goes unused for the round, aft
 Thanks goes to Mal for the full fix!\
 <https://steamcommunity.com/sharedfiles/filedetails/?id=1403395766>
 
+- "The Prone Mod" by Detective Sour Pants and Stuffy360\
+Fixed errors when going prone with a model without a head bone\
+<https://steamcommunity.com/sharedfiles/filedetails/?id=1100368137>
+
 ## Steam Workshop Link
 
 <https://steamcommunity.com/sharedfiles/filedetails/?id=3101810034>
