@@ -263,6 +263,10 @@ Thanks goes to Mal for the full fix!\
 Fixed errors when going prone with a model without a head bone\
 <https://steamcommunity.com/sharedfiles/filedetails/?id=1100368137>
 
+- "[TTT] Weapon Quick-Swap" by Detective Sour Pants and Stuffy360\
+Fixed error when swapping weapons without a max clip size set\
+<https://steamcommunity.com/sharedfiles/filedetails/?id=2752458427>
+
 ## Steam Workshop Link
 
 <https://steamcommunity.com/sharedfiles/filedetails/?id=3101810034>

@@ -26,6 +26,23 @@ local function FixVisibleSpectators()
     end
 end
 
+-- Fix the weapon quick swap mod erroring when trying to swap a weapon without a SWEP.Primary.ClipMax set
+local function FixWeaponQuickSwap()
+    if not hook.GetTable()["InitPostEntity"]["WQS.QuickSwapInit"] then return end
+    SWEP = weapons.GetStored("weapon_base")
+    SWEP.OldUseOverride = SWEP.UseOverride
+
+    function SWEP:UseOverride(...)
+        if not self.Primary.ClipMax then
+            self.Primary.ClipMax = -1
+        end
+
+        return self:OldUseOverride(...)
+    end
+end
+
+local firstRound = true
+
 hook.Add("TTTPrepareRound", "StigTTTFixes", function()
     FixVisibleSpectators()
     timer.Simple(0.1, FixVisibleSpectators)
@@ -33,19 +50,25 @@ hook.Add("TTTPrepareRound", "StigTTTFixes", function()
     timer.Create("StigTTTFixesVisibleSpectators", 1, 4, function()
         FixVisibleSpectators()
     end)
+
+    if firstRound then
+        FixWeaponQuickSwap()
+        firstRound = false
+    end
 end)
 
 -- Fixes an error with the prone mod, when using a playermodel without a head bone
 if CLIENT then
     hook.Add("InitPostEntity", "StigTTTFixes", function()
-        local oldCalcView = hook.GetTable()["CalcView"]["prone.ViewTransitions"]
+        local calcViewHooks = hook.GetTable()["CalcView"]
+        if not calcViewHooks then return end
+        oldCalcView = calcViewHooks["prone.ViewTransitions"]
+        if not oldCalcView then return end
 
-        if oldCalcView then
-            hook.Add("CalcView", "prone.ViewTransitions", function(ply, ...)
-                if not ply:LookupBone("ValveBiped.Bip01_Head1") then return end
+        hook.Add("CalcView", "prone.ViewTransitions", function(ply, ...)
+            if not ply:LookupBone("ValveBiped.Bip01_Head1") then return end
 
-                return oldCalcView(ply, ...)
-            end)
-        end
+            return oldCalcView(ply, ...)
+        end)
     end)
 end
