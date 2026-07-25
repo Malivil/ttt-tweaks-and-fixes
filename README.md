@@ -267,6 +267,10 @@ Fixed errors when going prone with a model without a head bone\
 Fixed error when swapping weapons without a max clip size set\
 <https://steamcommunity.com/sharedfiles/filedetails/?id=2752458427>
 
+- "Skyrim rideable horses" by Silverlan\
+Fixed a script include error on loading into any map\
+<https://steamcommunity.com/sharedfiles/filedetails/?id=1202035024>
+
 ## Steam Workshop Link
 
 <https://steamcommunity.com/sharedfiles/filedetails/?id=3101810034>
