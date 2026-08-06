@@ -33,7 +33,6 @@ SWEP.Spawnable = true
 SWEP.AdminSpawnable = true
 SWEP.AutoSpawnable = true
 SWEP.Kind = WEAPON_HEAVY
-SWEP.WeaponID = AMMO_SHOTGUN
 SWEP.Primary.RPM = 180
 SWEP.Primary.ClipSize = 2
 SWEP.Primary.DefaultClip = 2
@@ -186,5 +185,5 @@ function SWEP:GetHeadshotMultiplier(victim, dmginfo)
     local dist = victim:GetPos():Distance(att:GetPos())
     local d = math.max(0, dist - 140)
 
-    return 1 + math.max(0, 2.1 - 0.002 * (d ^ 1.25))
+    return 1 + math.max(0, 2.1 - 0.002 * d ^ 1.25)
 end

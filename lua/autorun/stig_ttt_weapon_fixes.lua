@@ -3,11 +3,58 @@
 -- Any weapon that has both a fix and tweak resides in stig_ttt_weapon_tweaks.lua, not here
 if engine.ActiveGamemode() ~= "terrortown" then return end
 
+-- All the default TTT SWEPs and ENTs that have SWEP/ENT.WeaponID
+-- Used for a minor networking optimisation to save sending the classname to the client for showing weapon/entity names in the end-of-round report
+-- Misused by countless custom SWEPs/ENTs on the workshop, which mistakenly set this property,
+-- overriding the names of all other SWEPs/ENTs that set it with the same value... (in the end-of-round report)
+-- Also fixes any mods using default TTT's EnumToWep() or WepToEnum() functions, which also use SWEP/ENT.WeaponID
+local defaultTTTWeapons = {
+    weapon_ttt_cse = true,
+    weapon_ttt_flaregun = true,
+    weapon_ttt_defuser = true,
+    weapon_ttt_m16 = true,
+    weapon_ttt_knife = true,
+    weapon_ttt_teleport = true,
+    weapon_ttt_binoculars = true,
+    weapon_zm_shotgun = true,
+    weapon_ttt_radio = true,
+    weapon_ttt_push = true,
+    weapon_ttt_stungun = true,
+    weapon_ttt_smokegrenade = true,
+    weapon_ttt_health_station = true,
+    weapon_ttt_beacon = true,
+    weapon_zm_molotov = true,
+    weapon_ttt_sipistol = true,
+    weapon_ttt_glock = true,
+    weapon_ttt_wtester = true,
+    weapon_zm_rifle = true,
+    weapon_zm_mac10 = true,
+    weapon_ttt_decoy = true,
+    weapon_zm_pistol = true,
+    weapon_ttt_phammer = true,
+    weapon_ttt_confgrenade = true,
+    weapon_ttt_c4 = true,
+    weapon_zm_sledge = true,
+    weapon_zm_revolver = true,
+    weapon_zm_improvised = true,
+}
+
+-- This is the only default TTT entity that sets ENT.WeaponID
+local defaultTTTEnts = {
+    ttt_knife_proj = true,
+}
+
 hook.Add("PreRegisterSWEP", "StigTTTWeaponFixes", function(SWEP, class)
     -- Quick fix for TTT weapons given slot 3 when it should be 2
     -- (+1 to slot number to determine its slot in-game, some weapons are 1-off the correct slot)
     if SWEP.Kind and SWEP.Kind ~= WEAPON_NADE and SWEP.Slot and SWEP.Slot == 3 then
         SWEP.Slot = 2
+    end
+
+    -- Fix custom weapons setting SWEP.WeaponID when it's only for default weapons
+    -- (Causes weapon names to override each other on the end-of-round popup/round report)
+    if SWEP.WeaponID and not defaultTTTWeapons[class] then
+        SWEP.WeaponID = nil
     end
 
     if class == "ttt_no_scope_awp" then
@@ -857,6 +904,12 @@ end)
 -- 
 -- 
 hook.Add("PreRegisterSENT", "StigTTTWeaponFixes", function(ENT, class)
+    -- Fix custom entities setting ENT.WeaponID when it's only for default entities
+    -- (Causes entity names to override each other on the end-of-round popup/round report)
+    if ENT.WeaponID and not defaultTTTEnts[class] then
+        ENT.WeaponID = nil
+    end
+
     if class == "projectile_laser_sandbox" then
         -- Fixes a heck of a lua error dump spam whenever the orbital base cannon is used
         -- (10,000+ lines of errors...)
