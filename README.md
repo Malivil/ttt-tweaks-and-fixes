@@ -193,10 +193,6 @@ Fixed lua errors that happen when spawning chickens from eggs\
 
 The following mods were fixed without needing to change bits of their code.
 
-- "R8 Revolver" by Corvatile\
-Fixed shoot sound having no volume drop-off (shoot sound is global), fixed pistol not taking pistol slot\
-<https://steamcommunity.com/sharedfiles/filedetails/?id=2903604575>
-
 - "Big Glock Compressed" by Frisco\
 Fixed big glock not using TTT ammo\
 <https://steamcommunity.com/sharedfiles/filedetails/?id=2169931075>

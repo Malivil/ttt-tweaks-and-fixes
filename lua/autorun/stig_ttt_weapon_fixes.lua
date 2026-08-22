@@ -79,24 +79,6 @@ hook.Add("PreRegisterSWEP", "StigTTTWeaponFixes", function(SWEP, class)
         SWEP.Primary.DefaultClip = SWEP.Primary.ClipSize
         SWEP.Primary.Ammo = "357"
         SWEP.AmmoEnt = "item_ammo_357_ttt"
-    elseif class == "weapon_ttt_csgo_r8revolver" then
-        -- Fix shoot sound having no volume drop-off (shoot sound is global)
-        -- Fix pistol not taking pistol slot
-        sound.Add({
-            name = "Weapon_CSGO_Revolver.SingleFixed",
-            channel = CHAN_WEAPON,
-            level = 75,
-            sound = "csgo/weapons/revolver/revolver-1_01.wav"
-        })
-
-        SWEP.Primary.Sound = Sound("Weapon_CSGO_Revolver.SingleFixed")
-
-        if SERVER then
-            resource.AddWorkshop("2903604575")
-        end
-
-        SWEP.Slot = 1
-        SWEP.Kind = WEAPON_PISTOL
     elseif class == "weapon_ttt_fortnite_building" then
         -- Fix lua error with fortnite building tool
         function SWEP:Holster()
