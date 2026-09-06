@@ -871,9 +871,9 @@ hook.Add("PreRegisterSWEP", "StigTTTWeaponFixes", function(SWEP, class)
                 local hookId = "Demon_MoveVictim" .. owner:Nick()
                 local oldFn = hooks[hookId]
 
-                hook.Add("StartCommand", hookId, function(player, ucmd)
-                    if not IsValid(self) then return end
-                    oldFn(player, ucmd)
+                hook.Add("StartCommand", hookId, function(ply, ucmd)
+                    if not IsValid(self) or not oldFn then return end
+                    oldFn(ply, ucmd)
                 end)
             end
         end
